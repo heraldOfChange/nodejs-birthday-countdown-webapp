@@ -1,0 +1,8 @@
+{
+  "name": "view-renderer",
+  "version": "1.0.0",
+  "main": "nunjucks-view-renderer.js",
+  "dependencies":{
+    "nunjucks": "^3.0.0"
+  }
+}
