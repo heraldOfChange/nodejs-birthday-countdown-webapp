@@ -1,11 +1,11 @@
-# NodeJS - Birthday Countdown Webapp
+# Node.js - Birthday Countdown Web App
 
-Behold! A birthday countdown webapp using nodejs | express.
+Behold! A birthday countdown webapp using node.js & the express framework.
 
-* side note - _project isn't live so you have to do some initial setup. You can't save your birthday if you don't have a redis instance running on localhost:6379_
+Checkout the [web app](https://birthday-countdown-mjwh.herokuapp.com/) and calculate the number of days until your next birthday.
 
-## Project Details
+## Project Outcomes / Objectives
 
-* experiment with various technologies
-* learn TDD coding practices (IoC, TDD)
-* deploying application to AWS using ARM templates
+- experiment with various technologies
+- learn TDD coding practices ( TDD - IoC, Dependency Injection )
+- deploying application to AWS using ARM templates
