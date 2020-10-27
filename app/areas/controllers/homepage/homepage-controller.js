@@ -19,7 +19,7 @@ class HomepageController {
   // page requests
   indexAction(req, res) {
     const today = this.dateFormat(new Date(), "yyyy-mm-dd").toString();
-    return this.renderPageWithData(req, res, ({ date: today }));
+    return this.renderPageWithData(req, res, ({ pageTitle: "Birthday Countdown Node.js Web App", date: today }));
   }
 
   postAction(req, res) {

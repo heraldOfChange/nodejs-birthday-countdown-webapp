@@ -18,12 +18,14 @@ const controllerIndexAction = (req, res) =>
       return result.createController(vr).indexAction(req, res);
     });
   });
+
 const controllerPostAction = (req, res) =>
   viewRenderer.then(vr => {
     return controller.then(result => {
       return result.createController(vr).postAction(req, res);
     });
   });
+  
 const controllerCountDays = (date) =>
   viewRenderer.then(vr => {
     return controller.then(result => {
@@ -174,7 +176,7 @@ describe('Tests birthday counter home page', () => {
       const yesterdayDate = yesterday.getMonth() + 1 + '-' + yesterday.getDate() + '-' + yesterday.getFullYear();
 
       return controllerCountDays(yesterdayDate).then(result => {
-        expect(result).toBe(364);
+        expect(result).toBe(363);
       });
     });
   });
