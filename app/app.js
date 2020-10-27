@@ -7,11 +7,6 @@ exports = module.exports = (express, homepageRoutes, path, middleware, views, er
 
   views.setView(app);
 
-  /* redirect initial get to https */
-  app.get('/', (req, res, next) => {
-    res.redirect(`https://${req.headers.host}${req.url}`);
-  });
-
   app.use('/', homepageRoutes);
 
   errorHandler.defaultHandler(app);
