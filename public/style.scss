@@ -8,6 +8,7 @@ $primaryColor: #31487e;
 }
 
 body {
+  font-size: 1rem;
   background: $primaryColor;
 }
 
@@ -111,7 +112,6 @@ body {
     margin: 0.2rem 0;
     border-radius: 2px;
     border: none;
-    font-size: 100%;
 
     &.btn {
       background-color: #53539988;
