@@ -7,9 +7,9 @@ exports = module.exports = (express, HomepageController, viewRenderer) => {
   router.get('/favicon.ico', (req, res) => { res.sendStatus(204); });    // send a 204 for favicon.ico
 
   /* redirect http get '/' to https */
-  router.get('/', (req, res, next) =>{
-    res.redirect('https://' + req.headers.host + req.url + 'app');
-  })
+  // router.get('/', (req, res, next) =>{
+  //   res.redirect('https://' + req.headers.host + req.url + 'app');
+  // })
 
   router.get('/app', (req, res, next) => controller.indexAction(req, res, next));
   router.post('/app', (req, res, next) => controller.postAction(req, res, next));

@@ -1,0 +1,137 @@
+$primaryColor: #31487e;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Nunito", sans-serif;
+}
+
+body {
+  background: $primaryColor;
+}
+
+a {
+  color: #00b7ff;
+}
+
+.flexedCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  overflow: hidden;
+  max-height: 100vh;
+  max-width: 100vw;
+  @extend .flexedCenter;
+  flex-direction: column;
+}
+
+.content-wrap {
+  max-width: 500px;
+  padding: 2rem;
+  background-color: darken($primaryColor, 10%);
+  position: relative;
+
+  .info {
+    @extend .flexedCenter;
+    flex-direction: column;
+    text-align: center;
+    max-width: 500px;
+    color: white;
+
+    .more-info {
+      display: block;
+      cursor: pointer;
+
+      .details {
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 1rem;
+        text-align: justify;
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+        background-color: darken($primaryColor, 20%);
+        z-index: -1;
+        @extend .flexedCenter;
+        flex-direction: column;
+        transition: opacity 300ms ease;
+        padding: 2rem;
+
+        p {
+          margin-top: 1rem;
+        }
+      }
+
+      &:hover,
+      &:active {
+        .details {
+          opacity: 1;
+          z-index: 1;
+        }
+      }
+    }
+  }
+}
+
+#birthday-countdown-form {
+  width: 100%;
+  padding: 1rem;
+
+  .actions {
+    @extend .flexedCenter;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 1rem;
+
+    input {
+      width: 48%;
+    }
+  }
+
+  input {
+    width: 100%;
+    padding: 1rem;
+    margin: 0.2rem 0;
+    border-radius: 2px;
+    border: none;
+    font-size: 100%;
+
+    &.btn {
+      background-color: #53539988;
+      color: white;
+      text-transform: capitalize;
+      font-weight: bold;
+      cursor: pointer;
+
+      &:hover,
+      &:active {
+        color: $primaryColor;
+        background-color: white;
+        transition: background-color 300ms ease;
+      }
+    }
+  }
+
+  > div {
+    width: 100%;
+  }
+}
+
+#days_label {
+  display: block;
+  background-color: #df4040;
+  color: white;
+  width: 100%;
+  text-align: center;
+  line-height: 2;
+}

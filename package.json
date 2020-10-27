@@ -5,6 +5,7 @@
   "scripts": {
     "start": "node init.js",
     "test": "jest --color=true",
+    "dev": "nodemon init.js",
     "lint": "eslint ."
   },
   "dependencies": {

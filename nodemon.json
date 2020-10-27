@@ -1,0 +1,4 @@
+{
+  "watch": ["app", "bin", "etc", "public", "init.js", "package.json"],
+  "ext": "js,njk,test.js,scss,css,json"
+}
