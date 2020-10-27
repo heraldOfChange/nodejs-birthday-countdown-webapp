@@ -39,7 +39,7 @@ class HomepageController {
       return this.renderPageWithData(req, res, data);
     };
 
-    const countRemainingDays = birthday => this.countDays(req.body.name, birthday);
+    const countRemainingDays = birthday => this.countDays(birthday);
 
     // database actions
     if (req.body.saveBtn)
@@ -64,18 +64,18 @@ class HomepageController {
             .then(loadedDate => {
               if (loadedDate !== null)
                 return renderPage({
-                  message: 'loaded datastore: ' + countRemainingDays(loadedDate),
+                  message: `Hello again ${req.body.name}, ` + countRemainingDays(loadedDate) + ' days till your next birthday.',
                   date: loadedDate
                 });
-              else return renderPage({ message: `we don't have a record for ${req.body.name} yet :(` });
+              else return renderPage({ message: `We don't have a record for ${req.body.name} yet.` });
             });
       });
 
-    return renderPage({ message: countRemainingDays(req.body.date), date: req.body.date });
+    return renderPage({ message: `Days until ${req.body.name}\'s next birthday: ` + countRemainingDays(req.body.date), date: req.body.date });
   }
 
 
-  countDays(enteredName, enteredDate) {
+  countDays(enteredDate) {
     if (enteredDate === '') return 'Please enter a date.';
 
     const birthday = new Date(enteredDate);
@@ -86,9 +86,7 @@ class HomepageController {
     if (today > birthday) birthday.setFullYear(today.getFullYear() + 1);
     const days = Math.ceil((birthday - today) / (1000 * 60 * 60 * 24));
 
-    if (enteredName === '') enteredName = 'user';
-
-    return 'Days to ' + enteredName + '\'s next birthday: ' + days;
+    return days;
   }
 }
 

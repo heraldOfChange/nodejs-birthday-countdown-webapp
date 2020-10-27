@@ -24,10 +24,10 @@ const controllerPostAction = (req, res) =>
       return result.createController(vr).postAction(req, res);
     });
   });
-const controllerCountDays = (user, date) =>
+const controllerCountDays = (date) =>
   viewRenderer.then(vr => {
     return controller.then(result => {
-      return result.createController(vr).countDays(user, date);
+      return result.createController(vr).countDays(date);
     });
   });
 
@@ -49,7 +49,7 @@ describe('Tests birthday counter home page', () => {
       };
 
       return controllerIndexAction(req, res).then(result => {
-        expect(result).toBe('NodeJS - Birthday Countdown');
+        expect(result).toBe('Birthday Countdown Web App');
       });
     });
 
@@ -61,7 +61,7 @@ describe('Tests birthday counter home page', () => {
         },
         end: response => {
           let $ = cheerio.load(response);
-          return $('#birthday_count_form').find(':input').length;
+          return $('#birthday-countdown-form').find(':input').length;
         }
       };
 
@@ -144,37 +144,26 @@ describe('Tests birthday counter home page', () => {
       };
 
       return controllerPostAction(req, res).then(result => {
-        expect(result).toBe('Days to Martijn\'s next birthday: 1');
+        expect(result).toBe('Days until Martijn\'s next birthday: 1');
       });
     });
   });
 
   describe('Tests countDays function in controller', () => {
     it('Returns the correct string when no value is given to the countdays function', () => {
-      return controllerCountDays('', '').then(result => {
+      return controllerCountDays('').then(result => {
         expect(result).toBe('Please enter a date.');
       });
     });
 
-    it('Returns the correct string with 1 day from now when entering tomorrow', () => {
+    it('Returns 1 day from now when entering tomorrow', () => {
       const tomorrow = new Date();
       tomorrow.setDate(tomorrow.getDate() + 1);
 
       const tomorrowDate = tomorrow.getMonth() + 1 + '-' + tomorrow.getDate() + '-' + tomorrow.getFullYear();
 
-      return controllerCountDays('Martijn', tomorrowDate).then(result => {
-        expect(result).toBe('Days to Martijn\'s next birthday: 1');
-      });
-    });
-
-    it('Shows "user" as the users name when no name is entered', () => {
-      const tomorrow = new Date();
-      tomorrow.setDate(tomorrow.getDate() + 1);
-
-      const tomorrowDate = tomorrow.getMonth() + 1 + '-' + tomorrow.getDate() + '-' + tomorrow.getFullYear();
-
-      return controllerCountDays('', tomorrowDate).then(result => {
-        expect(result).toBe('Days to user\'s next birthday: 1');
+      return controllerCountDays(tomorrowDate).then(result => {
+        expect(result).toBe(1);
       });
     });
 
@@ -184,8 +173,8 @@ describe('Tests birthday counter home page', () => {
 
       const yesterdayDate = yesterday.getMonth() + 1 + '-' + yesterday.getDate() + '-' + yesterday.getFullYear();
 
-      return controllerCountDays('Martijn', yesterdayDate).then(result => {
-        expect(result).toBe('Days to Martijn\'s next birthday: 364');
+      return controllerCountDays(yesterdayDate).then(result => {
+        expect(result).toBe(364);
       });
     });
   });
