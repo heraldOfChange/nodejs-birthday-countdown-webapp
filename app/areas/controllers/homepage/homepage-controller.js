@@ -2,10 +2,11 @@
 
 class HomepageController {
 
-  constructor(renderer, datastore) {
+  constructor(renderer, datastore, dateFormat) {
     this.homepageTemplate = 'homepage/homepage-template.njk';
     this.renderer = renderer;
     this.datastore = datastore.promisedDatastore();
+    this.dateFormat = dateFormat;
   }
 
   renderPageWithData(req, res, data = {}) {
@@ -17,7 +18,8 @@ class HomepageController {
 
   // page requests
   indexAction(req, res) {
-    return this.renderPageWithData(req, res);
+    const today = this.dateFormat(new Date(), "yyyy-mm-dd").toString();
+    return this.renderPageWithData(req, res, ({ date: today }));
   }
 
   postAction(req, res) {
@@ -48,7 +50,7 @@ class HomepageController {
           datastoreClient.setAsync(req.body.name, req.body.date);
           return renderPage({
             message: `saved! ${countRemainingDays(req.body.date)}`,
-            date: req.body.date
+            date: req.body.date 
           });
         }
       });
@@ -90,9 +92,9 @@ class HomepageController {
   }
 }
 
-exports = module.exports = datastore => {
-  return { createController: (renderer) => new HomepageController(renderer, datastore) };
+exports = module.exports = (datastore, dateFormat) => {
+  return { createController: (renderer) => new HomepageController(renderer, datastore, dateFormat) };
 };
 
 exports['@singleton'] = true;
-exports['@require'] = [ 'lib/redis-client' ];
+exports['@require'] = [ 'lib/redis-client', 'dateformat' ];
