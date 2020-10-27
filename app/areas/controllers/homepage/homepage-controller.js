@@ -49,7 +49,7 @@ class HomepageController {
         else {
           datastoreClient.setAsync(req.body.name, req.body.date);
           return renderPage({
-            message: `saved! ${countRemainingDays(req.body.date)}`,
+            message: `saved! ${countRemainingDays(req.body.date)} days remain before your next birthday ${req.body.name}.`,
             date: req.body.date 
           });
         }
